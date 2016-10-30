@@ -170,7 +170,7 @@
 				<!-- SHACL shapes can be used to communicate information about data structures associated with some process or interface, generate or validate data, or drive user interfaces. -->
 				SHACL シェイプは，いくつかのプロセスまたは，インターフェイスに関連付けられた構造についての情報をやり取りするためや，データを生成，検証するためため，ユーザインターフェイスを扱うために使うことができる．
 				<!-- This document defines the SHACL language and its underlying semantics. -->
-				このドキュメントはSHACL言語とそのにある意味を定義している.
+				このドキュメントはSHACL言語とその意味を定義している.
 			</p>
 		</section>
 
@@ -180,16 +180,22 @@
 		<section id="introduction">
 			<h2>Introduction</h2>
 			<p>
-				This document specifies SHACL (Shapes Constraint Language), a language for describing and constraining RDF graphs.
-				This section introduces SHACL with an overview of the key terminology and an example to illustrate basic concepts.
+				<!-- This document specifies SHACL (Shapes Constraint Language), a language for describing and constraining RDF graphs. -->
+				このドキュメントは，RDF グラフの表現と制約のための言語 SHACL (Shapes Constraint Language) の仕様を定義する．
+				<!-- This section introduces SHACL with an overview of the key terminology and an example to illustrate basic concepts. -->
+				このセクションは，重要なターミノロジーのをあらましと基本的なコンセプト説明する例をもちいて，SHACLの紹介する．
 			</p>
 			<section id="terminology">
 				<h3>Terminology</h3>
-				<p>
+				<!-- <p>
 					Throughout this document, the following terminology is used.
+				</p> -->
+				<p>
+					このドキュメント内では，以下のターミノロジーが用いられる．
 				</p>
 				<div class="def" id="rdf-terminology">
-					<div class="term-def-header">Basic RDF Terminology</div>
+					<!-- <div class="term-def-header">Basic RDF Terminology</div> -->
+					<div class="term-def-header">基本的なRDFターミノロジー</div>
 					<div>
 						This document uses the terms
 						<a href="http://www.w3.org/TR/rdf11-concepts/#dfn-rdf-graph"><dfn data-lt="graph|graphs|RDF graphs">RDF graph</dfn></a>,
@@ -208,7 +214,8 @@
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">Property Values</div>
+					<!-- <div class="term-def-header">Property Values</div> -->
+					<div class="term-def-header">プロパティ値</div>
 					<div>
 						The <dfn data-lt="value|property value|property values">values</dfn> of (or for) a property <code>p</code> for a <a>node</a> <code>n</code> in an <a>RDF graph</a> are the
 						<a>objects</a> of the <a>triples</a> in the <a>graph</a> that have <code>n</code> as <a>subject</a> and <code>p</code> as <a>predicate</a>.
@@ -217,7 +224,8 @@
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">SHACL Subclass, SHACL superclass</div>
+					<!-- <div class="term-def-header">SHACL Subclass, SHACL superclass</div> -->
+					<div class="term-def-header">SHACL サブクラス, SHACL スーパークラス</div>
 					<div>
 						A <a>node</a> <code>Sub</code> in an <a>RDF graph</a> is a <dfn data-lt="subclasses|subclass|SHACL subclasses">SHACL subclass</dfn> of another <a>node</a> <code>Super</code>
 						in the <a>graph</a> if there is a sequence of <a>triples</a> in the <a>graph</a> each with predicate <code>rdfs:subClassOf</code> such that the <a>subject</a> of the first <a>triple</a> is <code>Sub</code>,
@@ -227,28 +235,32 @@
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">SHACL Type</div>
+					<!-- <div class="term-def-header">SHACL Type</div> -->
+					<div class="term-def-header">SHACL 型</div>
 					<div>
 						The <dfn data-lt="type|types|SHACL type">SHACL types</dfn> of a <a>node</a> in an <a>RDF graph</a> are its <a>values</a> for <code>rdf:type</code> in the
 						<a>graph</a> as well as the <a>SHACL superclasses</a> of these <a>values</a> in the <a>graph</a>.
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">SHACL Class</div>
+					<!-- <div class="term-def-header">SHACL Class</div> -->
+					<div class="term-def-header">SHACL クラス</div>
 					<div>
 						<a>Nodes</a> in an <a>RDF graph</a> that might be subclasses, superclasses, or types of <a>nodes</a> in the <a>graph</a> are often referred to as <dfn data-lt="class|classes|SHACL classes">SHACL class</dfn>.
 						SHACL makes no assumption whether a SHACL class has any particular <a>value</a> for <code>rdf:type</code> in the <a>graph</a>.
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">SHACL Instance</div>
+					<!-- <div class="term-def-header">SHACL Instance</div> -->
+					<div class="term-def-header">SHACL インスタンス</div>
 					<div>
 						A <a>node</a> in an <a>RDF graph</a> is a <dfn data-lt="SHACL instance|SHACL instances">SHACL instance</dfn> of a <a>SHACL class</a> in the <a>graph</a>
 						if one of its <a>SHACL types</a> is the given <a>class</a>.
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">Data Graph, Shapes Graph, Validation, Report, Result, Violation, Failure</div>
+					<!-- <div class="term-def-header">Data Graph, Shapes Graph, Validation, Report, Result, Violation, Failure</div> -->
+					<div class="term-def-header">データグラフ, シェイプグラフ, 検証, レポート, 結果, 違反, 失敗</div>
 					<div>
 						SHACL defines what it means for an <a>RDF graph</a>, referred to as the <dfn data-lt="data graphs">data graph</dfn>,
 						to <dfn data-lt="validation|validates|validated">validate</dfn> against an <a>RDF graph</a> containing <a>shapes</a>, referred to as the <dfn data-lt="shapes graphs">shapes graph</dfn>.
@@ -261,7 +273,8 @@
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">Shape</div>
+					<!-- <div class="term-def-header">Shape</div> -->
+					<div class="term-def-header">シェイプ</div>
 					<div>
 						A <dfn data-lt="shape|shapes">shape</dfn> is a <a>node</a> in a <a>shapes graph</a> that is a <a>SHACL instance</a> of <code>sh:Shape</code>.
 						A shape provides a collection of <a>scopes</a>, <a>filters</a>, and <a>constraints</a> that specify how a <a>data graph</a> is
@@ -270,7 +283,8 @@
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">Scope</div>
+					<!-- <div class="term-def-header">Scope</div> -->
+					<div class="term-def-header">スコープ</div>
 					<div>
 						A <dfn data-lt="scope|scopes">scope</dfn> is a <a>triple</a> or a <a>node</a> in the <a>shapes graph</a>
 						that specifies which <a>nodes</a> in a <a>data graph</a> are considered in-scope for a <a>shape</a>.
@@ -280,13 +294,15 @@
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">Focus Node</div>
+					<!-- <div class="term-def-header">Focus Node</div> -->
+					<div class="term-def-header">フォーカスノード</div>
 					<div>
 						A <a>node</a> in the <a>data graph</a> that is validated against a <a>shape</a> is called a <dfn data-lt="focus node|focus nodes">focus node</dfn>.
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">Filter</div>
+					<!-- <div class="term-def-header">Filter</div> -->
+					<div class="term-def-header">フィルタ</div>
 					<div>
 						A <dfn data-lt="filter shape|filter shapes|filters">filter</dfn> is a <a>shape</a> in a <a>shapes graph</a> that limits the <a>nodes</a> that are
 						validated against the constraints of another shape.
@@ -294,7 +310,8 @@
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">Constraint</div>
+					<!-- <div class="term-def-header">Constraint</div> -->
+					<div class="term-def-header">制約</div>
 					<div>
 						A <dfn data-lt="constraint|constraints">constraint</dfn> is a <a>node</a> in the <a>shapes graph</a> that determines how to validate
 						<a>focus nodes</a> based on the <a>values</a> of properties of the <a>node</a>.
@@ -306,7 +323,8 @@
 					</div>
 				</div>
 				<div class="def">
-					<div class="term-def-header">Constraint Component, Parameter</div>
+					<!-- <div class="term-def-header">Constraint Component, Parameter</div> -->
+					<div class="term-def-header">制約コンポーネント, パロメータ</div>
 					<div>
 						A <dfn data-lt="constraint component|constraint components|components|component">constraint component</dfn> represents a part of a <a>constraint</a> that is determined
 						by the <a>values</a> one or more properties.
